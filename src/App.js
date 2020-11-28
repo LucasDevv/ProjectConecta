@@ -1,11 +1,10 @@
 import React from 'react';
 import {View } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import Home from './pages/home/home';
-import login from './pages/login/login';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import loginRegister from './pages/login/loginRegister.routes';
+import loginRegister from './pages/login/login.routes';
 const { Navigator, Screen} = createBottomTabNavigator();
 
 export default props => {

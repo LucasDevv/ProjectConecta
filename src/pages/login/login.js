@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, Alert, Text } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import Register from '../register/register';
-import logado from './logado';
+import register from '../register/register';
+import logado from './verifyAuth';
 import {Button} from 'react-native-elements';
 
 export default function login({navigation}) {
 
-  const user = logado();
+  const isAuth = logado();
   
-  const [usuario, setUsuario] = useState({
+  const [user, setUser] = useState({
     email: '',
     password: '',
   })
 
   logando = async () => {
-    const { email, password} = usuario;
+    const { email, password} = user;
     if(email !== '' &&  password !== ''){
       try{
         const userCredential = await auth().signInWithEmailAndPassword(email, password);
@@ -34,20 +34,20 @@ export default function login({navigation}) {
   .then(() => Alert.alert('Usuário deslogado com sucesso!'));
   }  
 
-  if (!user) {
+  if (!isAuth) {
     return (
       <View style={styles.container}>
         <TextInput 
           style={styles.input} 
           placeholder="Digite seu e-mail"
-          value={usuario.email}
-          onChangeText={email => setUsuario({...usuario, email})}
+          value={user.email}
+          onChangeText={email => setUser({...user, email})}
         />
         <TextInput 
           style={styles.input} 
           placeholder="Digite seua senha"
-          value={usuario.password}
-          onChangeText={password => setUsuario({...usuario, password})}
+          value={user.password}
+          onChangeText={password => setUser({...user, password})}
         />
         <Button
         buttonStyle={styles.ButtonLogin}
@@ -62,7 +62,7 @@ export default function login({navigation}) {
         <Button
          buttonStyle={styles.Button}
          title="Criar minha conta"
-         onPress={() => navigation.navigate(Register)}
+         onPress={() => navigation.navigate(register)}
         />
       </View>
     );

@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, StyleSheet, ScrollView, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {Button} from 'react-native-elements';
 
 
 export default function register() {
 
-  const [usuario, setUsuario] = useState({
+  const [user, setUser] = useState({
     email: '',
     password: '',
   })
 
-  register = async () => {
-    const {email, password} = usuario;
+  registerAuth = async () => {
+    const {email, password} = user;
     if(email !== '' && password !== ''){
       const userCredential = await auth().createUserWithEmailAndPassword(email, password)
       .then(() => {
@@ -47,14 +47,14 @@ export default function register() {
           <TextInput
           style={styles.input}
           placeholder="Digite seu e-mail"
-          value={usuario.email}
-          onChangeText={email => setUsuario({...usuario, email})}
+          value={user.email}
+          onChangeText={email => setUser({...user, email})}
           />
           <TextInput
           style={styles.input}
           placeholder="Senha"
-          value={usuario.password}
-          onChangeText={password => setUsuario({...usuario, password})}
+          value={user.password}
+          onChangeText={password => setUser({...user, password})}
           />
           <TextInput
           style={styles.input}
@@ -80,7 +80,7 @@ export default function register() {
           <Button
           buttonStyle={styles.Button}
           title="Cadastrar"
-          onPress={register}
+          onPress={registerAuth}
           />
         </View>
       </ScrollView>
