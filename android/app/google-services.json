@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1089041377324",
+    "firebase_url": "https://conectaapp-4fde1.firebaseio.com",
+    "project_id": "conectaapp-4fde1",
+    "storage_bucket": "conectaapp-4fde1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1089041377324:android:4c81439dcb1885d19dc989",
+        "android_client_info": {
+          "package_name": "com.conectaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1089041377324-rape5io3ugo4s2k56oo98m3njse7u6nc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYYYLj9lr0Z3_YUXIk6kOjQ9I8P2WRiHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1089041377324-rape5io3ugo4s2k56oo98m3njse7u6nc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
