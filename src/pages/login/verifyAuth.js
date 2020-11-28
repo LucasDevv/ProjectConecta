@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import auth from '@react-native-firebase/auth';
 
-export default function logado() {
+export default function verifyAuth() {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 

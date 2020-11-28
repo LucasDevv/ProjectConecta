@@ -1,28 +1,39 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, Alert, Text } from 'react-native';
-import auth from '@react-native-firebase/auth';
+import auth, { firebase } from '@react-native-firebase/auth';
 import register from '../register/register';
-import logado from './verifyAuth';
+import verifyAuth from './verifyAuth';
 import {Button} from 'react-native-elements';
+import firestore from '@react-native-firebase/firestore';
 
 export default function login({navigation}) {
+  
+  const isAuth = verifyAuth();
 
-  const isAuth = logado();
   
   const [user, setUser] = useState({
     email: '',
     password: '',
   })
 
-  logando = async () => {
+  loggingIn = async () => {
     const { email, password} = user;
     if(email !== '' &&  password !== ''){
-      try{
-        const userCredential = await auth().signInWithEmailAndPassword(email, password);
-        Alert.alert("Logado com sucesso!");
-      } catch(err){
-        Alert.alert("Email ou senha incorreta!");
-      }
+        const userCredential = await auth().signInWithEmailAndPassword(email, password)
+          .then(() => {
+            Alert.alert("Bem vindo!");
+          })
+          .catch(error => {
+            if (error.code === 'auth/email-already-in-use') {
+              Alert.alert("Endereço de e-mail já existe!");
+            }
+      
+            if (error.code === 'auth/invalid-email') {
+              Alert.alert("Endereço de e-mail inválido!");
+            }
+      
+            console.error(error);
+          });
     }else{
       Alert.alert("Email ou senha inválido!")
     }
@@ -30,8 +41,8 @@ export default function login({navigation}) {
 
   signingOut = async () => {
     auth()
-  .signOut()
-  .then(() => Alert.alert('Usuário deslogado com sucesso!'));
+      .signOut()
+      .then(() => Alert.alert('Usuário deslogado com sucesso!'));
   }  
 
   if (!isAuth) {
@@ -52,7 +63,7 @@ export default function login({navigation}) {
         <Button
         buttonStyle={styles.ButtonLogin}
          title="Entrar"
-         onPress={logando}
+         onPress={loggingIn}
         />
         <Text
           style={styles.Text}
@@ -75,6 +86,9 @@ export default function login({navigation}) {
          title="Deslogar"
          onPress={signingOut}
       />
+      <Text>
+       Bem vindo {isAuth.email}
+      </Text>
     </View>
   );
 }
